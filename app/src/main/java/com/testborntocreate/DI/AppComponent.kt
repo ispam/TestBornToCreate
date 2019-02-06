@@ -1,5 +1,6 @@
 package com.testborntocreate.DI
 
+import com.testborntocreate.Activities.DetailsActivity
 import com.testborntocreate.Activities.MainActivity
 import dagger.Component
 import javax.inject.Singleton
@@ -9,4 +10,6 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun inject(activity: MainActivity)
+
+    fun inject(activity: DetailsActivity)
 }

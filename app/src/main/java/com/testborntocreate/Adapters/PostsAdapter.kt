@@ -1,16 +1,20 @@
 package com.testborntocreate.Adapters
 
+import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.testborntocreate.Activities.DetailsActivity
 import com.testborntocreate.Data.Local.Post
 import com.testborntocreate.R
 
-class PostsAdapter(val list: MutableList<Post>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PostsAdapter(val list: MutableList<Post>, val activity: Activity) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.format_posts, parent, false))
@@ -39,17 +43,24 @@ class PostsAdapter(val list: MutableList<Post>) : RecyclerView.Adapter<RecyclerV
         private val title: TextView = view.findViewById(R.id.format_posts_title)
         private val excerpt: TextView = view.findViewById(R.id.format_posts_excerpt)
         private val thumbnail: ImageView = view.findViewById(R.id.format_posts_thumbnail)
+        private val card: CardView = view.findViewById(R.id.format_posts_card)
 
         fun bind(post: Post) {
 
             author.text = post.author
             title.text = post.title
-            excerpt.text = post.content // TODO Recude by length this
+            excerpt.text = post.content
 
             Picasso.get()
                 .load(post.thumbnail)
                 .fit()
                 .into(thumbnail)
+
+            card.setOnClickListener {
+                val intent = Intent(activity, DetailsActivity::class.java)
+                intent.putExtra("post", post)
+                activity.startActivity(intent)
+            }
 
         }
     }

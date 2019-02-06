@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         disposable.add(apiService.getAllPosts()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .map { main_recycler.adapter = PostsAdapter(it.toMutableList()) }
+            .map { main_recycler.adapter = PostsAdapter(it.toMutableList(), this@MainActivity) }
             .doOnError { e -> Log.e("getAllPosts()", e.localizedMessage) }
             .subscribe())
     }

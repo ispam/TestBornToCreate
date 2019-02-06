@@ -2,8 +2,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-                                   android:layout_height="350dp" android:clipToPadding="true"
-                                   android:layout_margin="4dp">
+                                   android:layout_height="300dp" android:clipToPadding="true"
+                                   android:layout_margin="4dp"
+                                   android:id="@+id/format_posts_card">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -81,6 +82,7 @@
                 android:text="Excerpt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
                 android:id="@+id/format_posts_excerpt_placeholder"
                 app:layout_constraintStart_toEndOf="@+id/format_posts_excerpt_icon"
                 android:layout_marginLeft="8dp" android:layout_marginStart="8dp"

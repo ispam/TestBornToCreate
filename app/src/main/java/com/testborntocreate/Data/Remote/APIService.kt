@@ -13,7 +13,7 @@ interface APIService {
     fun getAllPosts(): Single<List<Post>>
 
     @GET("/posts/{postId}/comments")
-    fun getAllCommentsOfPost(@Path("postId") post_id: String): Single<List<Comment>>
+    fun getAllCommentsOfPost(@Path("postId") post_id: Int): Single<List<Comment>>
 
     @POST("/posts/{postId}/comments")
     fun createNewCommentForPost(@Path("postId") post_id: String): Single<Comment>

@@ -1,7 +1,10 @@
 package com.testborntocreate.Data.Local
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Post(
     @SerializedName("id")
     var post_id: Int,
@@ -15,4 +18,4 @@ data class Post(
     var image: String,
     @SerializedName("content")
     var content: String
-    )
+    ): Parcelable
