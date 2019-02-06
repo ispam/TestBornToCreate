@@ -43,6 +43,7 @@ dependencies {
     def mockK = '1.9'
     def jUnit5 = '5.3.1'
     def lottie = '2.8.0'
+    def picasso = '2.71828'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -89,4 +90,6 @@ dependencies {
     testImplementation "org.assertj:assertj-core:$assertJ"
     // MockK:
     testImplementation "io.mockk:mockk:$mockK"
+    // Image and Photos
+    implementation "com.squareup.picasso:picasso:$picasso"
 }

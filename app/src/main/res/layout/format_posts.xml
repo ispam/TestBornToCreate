@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                   xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                   android:layout_height="350dp" android:clipToPadding="true"
+                                   android:layout_margin="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/ic_title"
+                android:id="@+id/format_posts_title_icon"
+                app:layout_constraintStart_toEndOf="@+id/format_posts_thumbnail" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/format_posts_author_icon"
+                app:layout_constraintBottom_toTopOf="@+id/divider"/>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/ic_excerpt"
+                android:id="@+id/format_posts_excerpt_icon" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/divider"/>
+        <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp" tools:srcCompat="@tools:sample/avatars[7]"
+                android:id="@+id/format_posts_thumbnail"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+        <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp" app:layout_constraintTop_toBottomOf="@+id/format_posts_thumbnail"
+                android:layout_marginTop="8dp"/>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/ic_name"
+                android:id="@+id/format_posts_author_icon"
+                app:layout_constraintStart_toEndOf="@+id/format_posts_thumbnail" android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/format_posts_title_icon"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/format_posts_author" app:layout_constraintStart_toEndOf="@+id/format_posts_author_icon"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@+id/format_posts_author_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/format_posts_author_icon"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/format_posts_title" app:layout_constraintStart_toEndOf="@+id/format_posts_title_icon"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@+id/format_posts_title_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/format_posts_title_icon"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/format_posts_excerpt" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/format_posts_excerpt_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+                android:text="Excerpt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/format_posts_excerpt_placeholder"
+                app:layout_constraintStart_toEndOf="@+id/format_posts_excerpt_icon"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@+id/format_posts_excerpt_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/format_posts_excerpt_icon"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
