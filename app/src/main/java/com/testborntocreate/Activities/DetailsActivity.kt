@@ -35,16 +35,23 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun getDetailsFromExtra() {
-        val post = intent.getParcelableExtra<Post>("post")
 
-        details_author.text = post.author
-        details_content.text = post.content
-        details_title.text = post.title
-        Picasso.get()
-            .load(post.image)
-            .into(details_image)
+        if (intent.getParcelableExtra<Post>("Post") != null) {
+            val post = intent.getParcelableExtra<Post>("post")
 
-        loadCommentsOfPost(post.post_id)
+            details_author.text = post.author
+            details_content.text = post.content
+            details_title.text = post.title
+            Picasso.get()
+                .load(post.image)
+                .into(details_image)
+
+            loadCommentsOfPost(post.post_id)
+        } else {
+
+            // TODO create flow for it
+        }
+
     }
 
     private fun loadCommentsOfPost(post_id: Int) {

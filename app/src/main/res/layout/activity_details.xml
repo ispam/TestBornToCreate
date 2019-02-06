@@ -5,6 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorBackground"
         tools:context=".Activities.DetailsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
@@ -38,86 +39,98 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
 
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" app:srcCompat="@drawable/ic_name"
-                    android:id="@+id/details_img1" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp"/>
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" app:srcCompat="@drawable/ic_title"
-                    android:id="@+id/details_img2" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/details_img1"/>
-            <TextView
-                    android:text="TextView"
-                    android:layout_width="0dp"
-                    android:textColor="@android:color/black"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/details_author" app:layout_constraintStart_toEndOf="@+id/details_img1"
-                    android:layout_marginStart="8dp" app:layout_constraintTop_toTopOf="@+id/details_img1"
-                    app:layout_constraintBottom_toBottomOf="@+id/details_img1"
-                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
-            <TextView
-                    android:text="TextView"
-                    android:layout_width="0dp"
-                    android:textColor="@android:color/black"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/details_title" app:layout_constraintStart_toEndOf="@+id/details_img2"
-                    android:layout_marginStart="8dp" app:layout_constraintTop_toTopOf="@+id/details_img2"
-                    app:layout_constraintBottom_toBottomOf="@+id/details_img2"
-                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" app:srcCompat="@drawable/ic_excerpt"
-                    android:id="@+id/details_img3" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/details_img2"/>
-            <TextView
-                    android:text="Excerpt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/details_txt1" app:layout_constraintStart_toEndOf="@+id/details_img3"
-                    android:layout_marginStart="8dp"
-                    android:textColor="@android:color/black"
-                    app:layout_constraintTop_toTopOf="@+id/details_img3"
-                    app:layout_constraintBottom_toBottomOf="@+id/details_img3"/>
-            <TextView
-                    android:text="TextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/details_content" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/details_img3" android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-    <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="0dp"
-            android:id="@+id/details_recycler"
-            android:layout_height="wrap_content" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"/>
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" app:srcCompat="@drawable/ic_name"
+                        android:id="@+id/details_img1" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp"/>
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" app:srcCompat="@drawable/ic_title"
+                        android:id="@+id/details_img2" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/details_img1"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="0dp"
+                        android:textColor="@android:color/black"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/details_author" app:layout_constraintStart_toEndOf="@+id/details_img1"
+                        android:layout_marginStart="8dp" app:layout_constraintTop_toTopOf="@+id/details_img1"
+                        app:layout_constraintBottom_toBottomOf="@+id/details_img1"
+                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="0dp"
+                        android:textColor="@android:color/black"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/details_title" app:layout_constraintStart_toEndOf="@+id/details_img2"
+                        android:layout_marginStart="8dp" app:layout_constraintTop_toTopOf="@+id/details_img2"
+                        app:layout_constraintBottom_toBottomOf="@+id/details_img2"
+                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" app:srcCompat="@drawable/ic_excerpt"
+                        android:id="@+id/details_img3" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/details_img2"/>
+                <TextView
+                        android:text="Excerpt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/details_txt1" app:layout_constraintStart_toEndOf="@+id/details_img3"
+                        android:layout_marginStart="8dp"
+                        android:textColor="@android:color/black"
+                        app:layout_constraintTop_toTopOf="@+id/details_img3"
+                        app:layout_constraintBottom_toBottomOf="@+id/details_img3"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="0dp"
+                        android:textColor="@android:color/black"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/details_content" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/details_img3" android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="0dp"
+                android:id="@+id/details_recycler"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView6"/>
+        <TextView
+                android:text="Comments "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:id="@+id/textView6" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/cardView2"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

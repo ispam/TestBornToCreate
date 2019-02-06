@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-    def room = "2.1.0-alpha02"
     def dagger = '2.16'
     def rxJava = '2.1.16'
     def rxAndroid = '2.0.1'
@@ -44,6 +43,7 @@ dependencies {
     def jUnit5 = '5.3.1'
     def lottie = '2.8.0'
     def picasso = '2.71828'
+    def loadingView = '1.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -57,10 +57,10 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0-beta01'
     implementation 'com.google.android.material:material:1.0.0-beta01'
 
-    // Room Database
-    implementation "androidx.room:room-runtime:$room"
-    kapt "androidx.room:room-compiler:$room"
-    implementation "androidx.room:room-rxjava2:$room"
+    // Image and Photos
+    implementation "com.squareup.picasso:picasso:$picasso"
+    // Loading View
+    implementation "com.ldoublem.loadingview:loadingviewlib:$loadingView"
     // Dependency Injection
     implementation "com.google.dagger:dagger:$dagger"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
@@ -90,6 +90,5 @@ dependencies {
     testImplementation "org.assertj:assertj-core:$assertJ"
     // MockK:
     testImplementation "io.mockk:mockk:$mockK"
-    // Image and Photos
-    implementation "com.squareup.picasso:picasso:$picasso"
+
 }
