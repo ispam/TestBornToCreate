@@ -1,7 +1,8 @@
-package com.testborntocreate
+package com.testborntocreate.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.testborntocreate.R
 
 class MainActivity : AppCompatActivity() {
 
