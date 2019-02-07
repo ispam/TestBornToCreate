@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.testborntocreate.Data.Local.Comment
+import com.testborntocreate.Data.Local.CommentWithName
 import com.testborntocreate.R
 
 class CommentsAdapter(val list: MutableList<Comment>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -24,6 +25,17 @@ class CommentsAdapter(val list: MutableList<Comment>) : RecyclerView.Adapter<Rec
 
     override fun getItemViewType(position: Int): Int {
         return position
+    }
+
+    fun clearList() {
+        list.clear()
+        notifyDataSetChanged()
+    }
+
+    fun appendComment(commentWithName: CommentWithName) {
+        val comment = Comment(commentWithName.comment_id, commentWithName.post_id, commentWithName.name, commentWithName.email, commentWithName.comment)
+        list.add(comment)
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

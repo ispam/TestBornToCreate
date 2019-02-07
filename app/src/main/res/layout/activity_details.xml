@@ -16,10 +16,9 @@
                 android:id="@+id/details_loading"
                 android:layout_height="125dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                app:layout_constraintTop_toTopOf="@+id/details_recycler"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintVertical_bias="0.44" app:layout_constraintBottom_toTopOf="@+id/details_recycler"
-                android:visibility="gone"/>
+                android:visibility="visible"
+                app:layout_constraintHorizontal_bias="0.408" android:layout_marginTop="220dp"
+                app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.cardview.widget.CardView
                 android:id="@+id/details_card1"
@@ -164,11 +163,6 @@
                 android:layout_marginBottom="16dp" app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
                 android:visibility="invisible"/>
-        <androidx.constraintlayout.widget.Guideline
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/details_guideline" app:layout_constraintGuide_percent="50"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

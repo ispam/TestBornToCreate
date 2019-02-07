@@ -5,6 +5,8 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -14,23 +16,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.testborntocreate.Adapters.CommentsAdapter
+import com.testborntocreate.Data.Local.CommentWithName
 import com.testborntocreate.Data.Local.Post
 import com.testborntocreate.Data.Remote.APIService
 import com.testborntocreate.R
-import com.testborntocreate.Utils.isCommentValid
-import com.testborntocreate.Utils.isEmailValid
-import com.testborntocreate.Utils.isNameValid
+import com.testborntocreate.Utils.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_details.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import kotlin.random.Random
 
 
 class DetailsActivity : AppCompatActivity() {
 
     private val disposable = CompositeDisposable()
+    private var menuItem: MenuItem? = null
 
     @Inject
     lateinit var apiService: APIService
@@ -44,7 +47,7 @@ class DetailsActivity : AppCompatActivity() {
 
         details_recycler.layoutManager = LinearLayoutManager(this@DetailsActivity, RecyclerView.VERTICAL, false)
         getDetailsFromExtra()
-        details_fab.setOnClickListener { createDialogForNewComment() }
+
     }
 
     private fun getDetailsFromExtra() {
@@ -59,7 +62,12 @@ class DetailsActivity : AppCompatActivity() {
                 .load(post.image)
                 .into(details_image)
 
-            loadCommentsOfPost(post.post_id)
+            connectivyManager({ loadCommentsOfPost(post.post_id) }, {
+                noInternetConnection(this@DetailsActivity)
+                details_loading.startAnim()
+                details_loading.visibility = View.VISIBLE
+            }, this@DetailsActivity)
+
         } else {
             Toast.makeText(
                 this@DetailsActivity,
@@ -75,22 +83,27 @@ class DetailsActivity : AppCompatActivity() {
         disposable.add(apiService.getAllCommentsOfPost(post_id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { details_loading.startAnim() }
             .delay(550, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .map {
+                details_loading.visibility = View.INVISIBLE
                 details_card1.visibility = View.VISIBLE
                 details_card2.visibility = View.VISIBLE
                 details_recycler.visibility = View.VISIBLE
                 details_comment_placeholder.visibility = View.VISIBLE
                 details_fab.visibility = View.VISIBLE
-                details_recycler.adapter = CommentsAdapter(it.toMutableList())
+                val adapter = CommentsAdapter(it.toMutableList())
+                details_recycler.adapter = adapter
+
+                details_fab.setOnClickListener { createDialogForNewComment(adapter) }
             }
             .doOnError { e -> Log.e("getAllCommentsOfPost", e.localizedMessage) }
             .subscribe())
 
     }
 
-    private fun createDialogForNewComment() {
+    private fun createDialogForNewComment(adapter: CommentsAdapter) {
         val builder = AlertDialog.Builder(this@DetailsActivity)
         val inflater = this@DetailsActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.dialog_comment, null, true)
@@ -135,8 +148,52 @@ class DetailsActivity : AppCompatActivity() {
                 else -> comment.error = getString(R.string.dialog_comment_range)
             }
             if (emailBoolean && nameBoolean && commentBoolean) {
+                createComment(name.text.toString(), email.text.toString(), comment.text.toString(), adapter, view)
                 dialog.dismiss()
             }
         }
+    }
+
+    private fun createComment(name: String, email: String, comment: String, adapter: CommentsAdapter, view: View) {
+        val random = Random.nextInt(9999)
+        val post = intent.getParcelableExtra<Post>("post")
+
+        val commentWithName = CommentWithName(random, post.post_id, name, email, comment)
+        connectivyManager({
+            disposable.add(apiService.createNewCommentForPost(post.post_id, commentWithName)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgressDialog(view.context) }
+                .delay(350, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { adapter.appendComment(commentWithName) }
+                .doAfterTerminate { hideProgressDialog() }
+                .subscribe())
+        },
+            {
+                noInternetConnection(this@DetailsActivity)
+            }, this@DetailsActivity
+        )
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        this.menuItem = menu?.findItem(R.id.refresh)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.refresh -> {
+                getDetailsFromExtra()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onStop() {
+        hideProgressDialog()
+        if (!disposable.isDisposed) disposable.clear()
+        super.onStop()
     }
 }

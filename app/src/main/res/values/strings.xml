@@ -10,4 +10,6 @@
     <string name="dialog_comment_range">Comment must be between 6 and 300 characters</string>
     <string name="details_no_info">Oops!, we didn\'t receive all the information we needeed</string>
     <string name="details_title">Post Details</string>
+    <string name="dialog_loading">Loading</string>
+    <string name="no_connection">No internet connection, please try again later</string>
 </resources>

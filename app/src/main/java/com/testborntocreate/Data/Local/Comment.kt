@@ -14,3 +14,12 @@ data class Comment(
     @SerializedName("comment")
     var comment: String
 )
+
+data class CommentWithName(
+    @SerializedName("id")
+    var comment_id: Int,
+    var post_id: Int,
+    var name: String,
+    var email: String,
+    var comment: String
+)
