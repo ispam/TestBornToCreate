@@ -2,4 +2,12 @@
     <string name="app_name">TestBornToCreate</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_create">Create</string>
+    <string name="dialog_email_empty">Email can\'t be empty</string>
+    <string name="dialog_email_invalid">Email is invalid, please check it</string>
+    <string name="dialog_name_empty">Name can\'t be empty</string>
+    <string name="dialog_name_invalid">Name is invalid, only characters are allowed</string>
+    <string name="dialog_comment_empty">Comment can\'t be empty</string>
+    <string name="dialog_comment_range">Comment must be between 6 and 300 characters</string>
+    <string name="details_no_info">Oops!, we didn\'t receive all the information we needeed</string>
+    <string name="details_title">Post Details</string>
 </resources>

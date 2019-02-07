@@ -17,12 +17,14 @@ import com.testborntocreate.Adapters.CommentsAdapter
 import com.testborntocreate.Data.Local.Post
 import com.testborntocreate.Data.Remote.APIService
 import com.testborntocreate.R
+import com.testborntocreate.Utils.isCommentValid
+import com.testborntocreate.Utils.isEmailValid
+import com.testborntocreate.Utils.isNameValid
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_details.*
 import java.util.concurrent.TimeUnit
-import java.util.regex.Pattern
 import javax.inject.Inject
 
 
@@ -38,7 +40,7 @@ class DetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_details)
         App.component.inject(this)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        title = "Post Details"
+        title = getString(R.string.details_title)
 
         details_recycler.layoutManager = LinearLayoutManager(this@DetailsActivity, RecyclerView.VERTICAL, false)
         getDetailsFromExtra()
@@ -61,7 +63,7 @@ class DetailsActivity : AppCompatActivity() {
         } else {
             Toast.makeText(
                 this@DetailsActivity,
-                "Oops!, we didn't receive all the information we needeed",
+                getString(R.string.details_no_info),
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -73,20 +75,9 @@ class DetailsActivity : AppCompatActivity() {
         disposable.add(apiService.getAllCommentsOfPost(post_id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
-//                 val displayMetrics = DisplayMetrics()
-//                windowManager.defaultDisplay.getMetrics(displayMetrics)
-//                val height = displayMetrics.heightPixels
-//                val params = details_guideline.layoutParams as ConstraintLayout.LayoutParams
-//                params.guidePercent = height.toFloat()
-//                details_guideline.layoutParams = params
-//                details_loading.startAnim()
-            }
             .delay(550, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .map {
-//                details_loading.stopAnim()
-//                details_loading.visibility = View.INVISIBLE
                 details_card1.visibility = View.VISIBLE
                 details_card2.visibility = View.VISIBLE
                 details_recycler.visibility = View.VISIBLE
@@ -100,7 +91,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun createDialogForNewComment() {
-        val builder: AlertDialog.Builder = AlertDialog.Builder(this@DetailsActivity)
+        val builder = AlertDialog.Builder(this@DetailsActivity)
         val inflater = this@DetailsActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.dialog_comment, null, true)
         val name = view.findViewById<EditText>(R.id.dialog_edit_name)
@@ -108,25 +99,44 @@ class DetailsActivity : AppCompatActivity() {
         val comment = view.findViewById<EditText>(R.id.dialog_edit_comment)
 
         val dialog: AlertDialog = builder
-            .setNegativeButton(view.context.getString(R.string.dialog_cancel), null)
-            .setPositiveButton(view.context.getString(R.string.dialog_create)) { _, _ ->
-
-            }
             .setView(view)
+            .setNegativeButton(view.context.getString(R.string.dialog_cancel), null)
+            .setPositiveButton(view.context.getString(R.string.dialog_create)) { _, _ -> }
+            .setCancelable(false)
             .create()
 
         dialog.show()
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK)
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+
+        val positive = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+        val negative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+        positive.setTextColor(Color.BLACK)
+        negative.setTextColor(Color.BLACK)
+
+        positive.setOnClickListener {
+            var nameBoolean = false
+            var emailBoolean = false
+            var commentBoolean = false
+
+            when {
+                email.text.length > 5 && isEmailValid(email.text.toString()) -> emailBoolean = true
+                email.text.isNullOrEmpty() -> email.error = getString(R.string.dialog_email_empty)
+                else -> email.error = getString(R.string.dialog_email_invalid)
+            }
+
+            when {
+                isNameValid(name.text.toString()) -> nameBoolean = true
+                name.text.isNullOrEmpty() -> name.error = getString(R.string.dialog_name_empty)
+                else -> name.error = getString(R.string.dialog_name_invalid)
+            }
+
+            when {
+                isCommentValid(comment.text.toString()) -> commentBoolean = true
+                comment.text.isNullOrEmpty() -> comment.error = getString(R.string.dialog_comment_empty)
+                else -> comment.error = getString(R.string.dialog_comment_range)
+            }
+            if (emailBoolean && nameBoolean && commentBoolean) {
+                dialog.dismiss()
+            }
+        }
     }
-
-    fun isEmailValid(email: String): Boolean {
-        val regExpn = ("^([a-z\\s])")
-
-        val pattern = Pattern.compile(regExpn, Pattern.CASE_INSENSITIVE)
-        val matcher = pattern.matcher(email)
-
-        return matcher.matches()
-    }
-
 }
