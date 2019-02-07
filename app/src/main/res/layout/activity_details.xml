@@ -11,14 +11,25 @@
     <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
                                                        android:layout_height="match_parent">
 
+        <com.ldoublem.loadingviewlib.view.LVGhost
+                android:layout_width="150dp"
+                android:id="@+id/details_loading"
+                android:layout_height="125dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@+id/details_recycler"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintVertical_bias="0.44" app:layout_constraintBottom_toTopOf="@+id/details_recycler"
+                android:visibility="gone"/>
+
         <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
+                android:id="@+id/details_card1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -40,15 +51,16 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
+                android:id="@+id/details_card2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView">
+                app:layout_constraintTop_toBottomOf="@+id/details_card1">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -90,9 +102,9 @@
                         android:layout_height="wrap_content" app:srcCompat="@drawable/ic_excerpt"
                         android:id="@+id/details_img3" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/details_img2"/>
+                        app:layout_constraintTop_toBottomOf="@+id/divider3"/>
                 <TextView
-                        android:text="Excerpt"
+                        android:text="Full Content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/details_txt1" app:layout_constraintStart_toEndOf="@+id/details_img3"
@@ -110,26 +122,53 @@
                         android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
                         app:layout_constraintTop_toBottomOf="@+id/details_img3" android:layout_marginBottom="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"/>
+                <View
+                        android:id="@+id/divider3"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/details_img2"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="0dp"
                 android:id="@+id/details_recycler"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
                 app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView6"/>
+                app:layout_constraintTop_toBottomOf="@+id/details_comment_placeholder"/>
         <TextView
                 android:text="Comments "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
-                android:id="@+id/textView6" app:layout_constraintStart_toStartOf="parent"
+                android:visibility="invisible"
+                android:id="@+id/details_comment_placeholder" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/cardView2"/>
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/details_card2"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                style="@style/Widget.Design.FloatingActionButton"
+                android:focusable="true" app:srcCompat="@drawable/ic_new" android:id="@+id/details_fab"
+                android:layout_marginBottom="16dp" app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
+                android:visibility="invisible"/>
+        <androidx.constraintlayout.widget.Guideline
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/details_guideline" app:layout_constraintGuide_percent="50"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

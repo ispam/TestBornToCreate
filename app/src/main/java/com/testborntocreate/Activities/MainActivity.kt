@@ -3,6 +3,7 @@ package com.testborntocreate.Activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.testborntocreate.Adapters.PostsAdapter
@@ -34,8 +35,16 @@ class MainActivity : AppCompatActivity() {
         disposable.add(apiService.getAllPosts()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                main_loading.visibility = View.VISIBLE
+                main_loading.startAnim()
+            }
             .map { main_recycler.adapter = PostsAdapter(it.toMutableList(), this@MainActivity) }
             .doOnError { e -> Log.e("getAllPosts()", e.localizedMessage) }
+            .doAfterTerminate {
+                main_loading.stopAnim()
+                main_loading.visibility = View.INVISIBLE
+            }
             .subscribe())
     }
 

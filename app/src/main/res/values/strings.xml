@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TestBornToCreate</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_create">Create</string>
 </resources>
