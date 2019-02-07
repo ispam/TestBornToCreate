@@ -35,11 +35,8 @@ class MainActivity : AppCompatActivity() {
         main_recycler.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
         connectivyManager({
-//                invalidateOptionsMenu()
-                this.menuItem?.isVisible = false
                 getListOfPosts()
             }, {
-                this.menuItem?.isVisible = true
                 noInternetConnection(this)
                 main_loading.visibility = View.VISIBLE
                 main_loading.startAnim()
